@@ -4,7 +4,7 @@ var models = require('../models/models.js');
 exports.index = function(req, res){
 	//res.render('quizes/question', {pregunta: 'Capital de Italia'});
 	models.Quiz.findAll().then(function(quizes){
-		res.render('quizes/index.ejs',{ quizes: quizes});
+		res.render('quizes/index',{ quizes: quizes});
 	})
 };
 
