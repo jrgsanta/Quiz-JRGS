@@ -1,10 +1,10 @@
 var models = require('../models/models.js');
 
-// GET /quizes/question
-exports.question = function(req, res){
+// GET /quizes
+exports.index = function(req, res){
 	//res.render('quizes/question', {pregunta: 'Capital de Italia'});
-	models.Quiz.findAll().success(function(quiz){
-		res.render('quizes/question',{ pregunta: quiz[0].pregunta})
+	models.Quiz.findAll().then(function(quizes){
+		res.render('quizes/index.ejs',{ quizes: quizes});
 	})
 };
 
