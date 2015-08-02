@@ -13,18 +13,26 @@ exports.author = function(req, res){
 	res.render('author', {nombre: 'Juan Ramón García'});
 };
 
-// GET /quizes/answer
+// GET /quizes/:id
+exports.show = function(req, res){
+	//res.render('quizes/question', {pregunta: 'Capital de Italia'});
+	models.Quiz.find(req.params.quizId).then(function(quiz){
+		res.render('quizes/show',{ quiz: quiz})
+	})
+};
+
+// GET /quizes/:id/answer
 exports.answer = function(req, res){
 //	if (req.query.respuesta === 'Roma'){
 //		res.render('quizes/answer', {respuesta: 'Correcto'});
 //	} else {
 //		res.render('quizes/answer', {respuesta: 'Incorrecto'});
 //	}
-	models.Quiz.findAll().success(function(quiz){
-		if (req.query.respuesta === quiz[0].respuesta){
-			res.render('quizes/answer',{ respuesta: 'Correcto'});
+	models.Quiz.find(req.params.quizId).then(function(quiz){
+		if (req.query.respuesta === quiz.respuesta){
+			res.render('quizes/answer',{ quiz: quiz, respuesta: 'Correcto'});
 		} else {
-			res.render('quizes/answer',{ respuesta: 'Incorrecto'});
+			res.render('quizes/answer',{ quiz: quiz, respuesta: 'Incorrecto'});
 		}
 	})
 };
