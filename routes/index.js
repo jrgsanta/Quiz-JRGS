@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 });
 
 //Autoload
-router.param('quizId',quizController.load);
+router.param('quizId', quizController.load);
 
 router.get('/quizes',	quizController.index);
 router.get('/quizes/:quizId(\\d+)',	quizController.show);
